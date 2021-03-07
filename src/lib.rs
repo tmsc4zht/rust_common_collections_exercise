@@ -6,8 +6,7 @@ pub fn median(input: &[i32]) -> f64 {
   0.0
 }
 
-pub fn mode(input: &[i32]) -> f64 {
-  0.0
+pub fn mode(input: &[i32]) -> Vec<i32> {
 }
 
 pub fn pig_latin(input: &str) -> String {
@@ -62,7 +61,15 @@ mod test {
   fn mode_test() {
     let input = vec![1, 1, 2];
     let result = mode(&input);
-    assert_eq!(result, 1.0);
+    assert_eq!(result, vec![1]);
+
+    let input = vec![1, 2, 2];
+    let result = mode(&input);
+    assert_eq!(result, vec![2]);
+
+    let input = vec![1, 1, 2, 2];
+    let result = mode(&input);
+    assert_eq!(result, vec![1, 2]);
   }
 
   #[test]
