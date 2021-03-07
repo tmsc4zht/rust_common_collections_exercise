@@ -53,7 +53,22 @@ pub fn mode(input: &[i32]) -> Vec<i32> {
 }
 
 pub fn pig_latin(input: &str) -> String {
-  String::new()
+  let mut chars = input.chars();
+  let first_char = chars.next();
+
+  if let None = first_char {
+    return String::new();
+  };
+
+  let first_char = first_char.unwrap();
+
+  match first_char {
+    'a' | 'i' | 'u' | 'e' | 'o' => format!("{}hay", input),
+    _ => {
+      let s: String = chars.collect();
+      format!("{}fay", s)
+    }
+  }
 }
 
 #[cfg(test)]
