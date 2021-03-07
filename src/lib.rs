@@ -1,12 +1,55 @@
+use std::collections::HashMap;
+
 pub fn mean(input: &[i32]) -> f64 {
-  0.0
+  if input.len() == 0 {
+    panic!("input lenght is zero")
+  }
+  let mut sum = 0.0;
+  for x in input {
+    sum += *x as f64;
+  }
+  return sum / input.len() as f64;
 }
 
 pub fn median(input: &[i32]) -> f64 {
-  0.0
+  if input.len() == 0 {
+    panic!("input lenght is zero")
+  }
+
+  let mut sorted = vec![];
+  sorted.extend_from_slice(input);
+
+  if input.len() % 2 == 0 {
+    let idx = input.len() / 2;
+    (sorted[idx - 1] + sorted[idx]) as f64 / 2.0
+  } else {
+    let idx = input.len() / 2;
+    sorted[idx] as f64
+  }
 }
 
 pub fn mode(input: &[i32]) -> Vec<i32> {
+  if input.len() == 0 {
+    panic!("input lenght is zero")
+  }
+  let mut freq = HashMap::new();
+  for x in input {
+    let count = freq.entry(x).or_insert(0);
+    *count += 1;
+  }
+  let mut max = 0;
+  let mut result = Vec::new();
+  for (key, val) in freq {
+    if val > max {
+      result.clear();
+      result.push(*key);
+      max = val;
+    } else if val == max {
+      result.push(*key)
+    }
+  }
+  result.sort_unstable();
+  return result;
 }
 
 pub fn pig_latin(input: &str) -> String {
