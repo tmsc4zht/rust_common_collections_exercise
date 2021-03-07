@@ -124,6 +124,10 @@ mod test {
 
   #[test]
   fn pig_latin_test() {
+    let input = "";
+    let result = pig_latin(input);
+    assert_eq!(result, "");
+
     let input = "first";
     let result = pig_latin(input);
     assert_eq!(result, "irstfay");
