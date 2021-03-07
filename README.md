@@ -1,5 +1,7 @@
 # rust_common_collections_exercise
 
+[![Rust](https://github.com/tmsc4zht/rust_common_collections_exercise/actions/workflows/rust.yml/badge.svg)](https://github.com/tmsc4zht/rust_common_collections_exercise/actions/workflows/rust.yml)
+
 https://doc.rust-jp.rs/book-ja/ch08-03-hash-maps.html
 
 の実装
