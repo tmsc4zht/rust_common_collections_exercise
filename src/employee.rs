@@ -16,7 +16,10 @@ impl Employee {
     member.push(name.into());
     member.sort();
   }
-}
+
+  fn list_member(&self, department: &str) -> Option<&Vec<String>> {
+    self.data.get(department)
+  }
 
 #[cfg(test)]
 mod test {
@@ -34,5 +37,18 @@ mod test {
     want.insert(String::from("Sales"), vec![String::from("Amir")]);
 
     assert_eq!(data.data, want);
+  }
+
+  #[test]
+  fn list_member_test() {
+    let mut data = Employee::new();
+
+    data.add("Engineering", "Bob");
+    data.add("Engineering", "Alice");
+    data.add("Sales", "Amir");
+
+    let want = vec![String::from("Alice"), String::from("Bob")];
+
+    assert_eq!(data.list_member("Engineering").unwrap(), &want);
   }
 }
