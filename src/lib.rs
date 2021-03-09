@@ -66,7 +66,7 @@ pub fn pig_latin(input: &str) -> String {
     'a' | 'i' | 'u' | 'e' | 'o' => format!("{}hay", input),
     _ => {
       let s: String = chars.collect();
-      format!("{}fay", s)
+      format!("{}{}ay", s, first_char)
     }
   }
 }
@@ -146,6 +146,10 @@ mod test {
     let input = "first";
     let result = pig_latin(input);
     assert_eq!(result, "irstfay");
+
+    let input = "know";
+    let result = pig_latin(input);
+    assert_eq!(result, "nowkay");
 
     let input = "apple";
     let result = pig_latin(input);
