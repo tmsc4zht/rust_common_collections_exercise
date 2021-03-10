@@ -23,7 +23,9 @@ impl Employee {
 
   fn list_department(&self) -> Vec<String> {
     let result: Vec<&String> = self.data.keys().collect();
-    result.into_iter().map(|x| x.clone()).collect()
+    let mut result: Vec<String> = result.into_iter().map(|x| x.clone()).collect();
+    result.sort();
+    result
   }
 }
 
@@ -65,7 +67,7 @@ mod test {
     data.add("Sales", "Amir");
     data.add("Engineering", "Bob");
 
-    let want = vec![String::from("Sales"), String::from("Engineering")];
+    let want = vec![String::from("Engineering"), String::from("Sales")];
 
     data.list_department();
 
