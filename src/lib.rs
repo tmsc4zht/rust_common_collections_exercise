@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+pub mod employee;
+
 pub fn mean(input: &[i32]) -> f64 {
   if input.len() == 0 {
     panic!("input lenght is zero")
