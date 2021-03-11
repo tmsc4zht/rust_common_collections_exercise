@@ -56,10 +56,53 @@ impl TextInterface {
 
 fn parse_instruction(input: &str) -> Result<Instruction, &'static str> {
   if input == "exit" {
-    Ok(Instruction::Exit)
-  } else {
-    Err("not implemented")
+    return Ok(Instruction::Exit);
+  };
+
+  if input == "Listall" {
+    return Ok(Instruction::ListAll);
   }
+
+  let mut tokens = input.split_ascii_whitespace();
+
+  let first = tokens.next();
+  if let None = first {
+    return Err("no instruciton");
+  };
+
+  let first = first.unwrap();
+
+  if first == "Add" {
+    let member = tokens.next();
+    if let None = member {
+      return Err("`Add` instruction needs member as a second word");
+    }
+    let member = member.unwrap();
+    let to = tokens.next();
+    if let None = to {
+      return Err("`Add` instruction needs `to` as a third word");
+    }
+    if to.unwrap() != "to" {
+      return Err("`Add` instruction needs `to` as a third word");
+    }
+    let department = tokens.next();
+    if let None = department {
+      return Err("`Add` instruction needs department as a fourth word");
+    }
+    let department = department.unwrap();
+    return Ok(Instruction::Add(department.to_owned(), member.to_owned()));
+  }
+
+  if first == "List" {
+    let department = tokens.next();
+    if let None = department {
+      return Err("`List` instruction needs department as a second word");
+    }
+    let department = department.unwrap();
+    return Ok(Instruction::List(department.to_owned()));
+  }
+
+  return Err("unknwon instraction");
 }
 
 #[cfg(test)]
