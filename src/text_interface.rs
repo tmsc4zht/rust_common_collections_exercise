@@ -38,9 +38,32 @@ impl TextInterface {
 
       match parse_instruction(&input) {
         Ok(instruction) => match instruction {
-          Instruction::Add(department, member) => (),
-          Instruction::List(department) => (),
-          Instruction::ListAll => (),
+          Instruction::Add(department, member) => {
+            self.employee.add(&department, &member);
+            println!("{} is added to {}", member, department);
+          }
+          Instruction::List(department) => {
+            let members = self.employee.list_member(&department);
+            match members {
+              None => eprintln!("department `{}` is not found", department),
+              Some(members) => {
+                println!("members of department `{}`", department);
+                for member in members {
+                  println!("- {}", member);
+                }
+              }
+            }
+          }
+          Instruction::ListAll => {
+            let departments = self.employee.list_department();
+            for department in departments {
+              let members = self.employee.list_member(&department).unwrap();
+              println!("members of department `{}`", department);
+              for member in members {
+                println!("- {}", member);
+              }
+            }
+          }
           Instruction::Exit => {
             println!("exit program.");
             break;
