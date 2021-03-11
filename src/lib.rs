@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 pub mod employee;
+pub mod text_interface;
 
 pub fn mean(input: &[i32]) -> f64 {
   if input.len() == 0 {
