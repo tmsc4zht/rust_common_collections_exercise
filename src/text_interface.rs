@@ -34,8 +34,26 @@ impl TextInterface {
         .read_line(&mut input)
         .expect("Failed to read line");
 
-      println!("{}", input)
+      let input = input.trim();
+
+      match parse_instruction(&input) {
+        Ok(instruction) => match instruction {
+          Instruction::Add(department, member) => (),
+          Instruction::List(department) => (),
+          Instruction::ListAll => (),
+          Instruction::Exit => {
+            println!("exit program.");
+            break;
+          }
+        },
+        Err(msg) => {
+          eprintln!("{}", msg)
+        }
+      }
     }
+  }
+}
+
 fn parse_instruction(input: &str) -> Result<Instruction, &'static str> {
   if input == "exit" {
     Ok(Instruction::Exit)
