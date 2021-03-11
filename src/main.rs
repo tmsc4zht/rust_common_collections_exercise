@@ -1,3 +1,9 @@
+extern crate rust_common_collections_exercise;
+
+use rust_common_collections_exercise::text_interface::TextInterface;
+
 fn main() {
-    println!("Hello, world!");
+    let mut interface = TextInterface::new();
+
+    interface.run();
 }
