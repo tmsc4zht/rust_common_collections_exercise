@@ -73,7 +73,7 @@ mod test {
 
     assert_eq!(result, Instruction::Exit);
 
-    let input = "list";
+    let input = "Listall";
     let result = parse_instruction(input).unwrap();
 
     assert_eq!(result, Instruction::ListAll);
