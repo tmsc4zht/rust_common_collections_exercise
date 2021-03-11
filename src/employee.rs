@@ -1,27 +1,27 @@
 use std::collections::HashMap;
 
-struct Employee {
+pub struct Employee {
   data: HashMap<String, Vec<String>>,
 }
 
 impl Employee {
-  fn new() -> Employee {
+  pub fn new() -> Employee {
     Employee {
       data: HashMap::new(),
     }
   }
 
-  fn add(&mut self, department: &str, name: &str) {
+  pub fn add(&mut self, department: &str, name: &str) {
     let member = self.data.entry(department.into()).or_insert(vec![]);
     member.push(name.into());
     member.sort();
   }
 
-  fn list_member(&self, department: &str) -> Option<&Vec<String>> {
+  pub fn list_member(&self, department: &str) -> Option<&Vec<String>> {
     self.data.get(department)
   }
 
-  fn list_department(&self) -> Vec<String> {
+  pub fn list_department(&self) -> Vec<String> {
     let result: Vec<&String> = self.data.keys().collect();
     let mut result: Vec<String> = result.into_iter().map(|x| x.clone()).collect();
     result.sort();
