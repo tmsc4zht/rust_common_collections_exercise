@@ -36,6 +36,11 @@ impl TextInterface {
 
       println!("{}", input)
     }
+fn parse_instruction(input: &str) -> Result<Instruction, &'static str> {
+  if input == "exit" {
+    Ok(Instruction::Exit)
+  } else {
+    Err("not implemented")
   }
 }
 
