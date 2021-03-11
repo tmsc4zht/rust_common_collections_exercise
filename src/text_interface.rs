@@ -1,6 +1,14 @@
 use crate::employee::Employee;
 use std::io::{self, stdout, Write};
 
+#[derive(Debug, PartialEq)]
+enum Instruction {
+  Add(String, String),
+  List(String),
+  ListAll,
+  Exit,
+}
+
 pub struct TextInterface {
   employee: Employee,
 }
@@ -34,4 +42,30 @@ impl TextInterface {
 #[cfg(test)]
 mod test {
   use super::*;
+
+  #[test]
+  fn test_parse_instruction() {
+    let input = "exit";
+    let result = parse_instruction(input).unwrap();
+
+    assert_eq!(result, Instruction::Exit);
+
+    let input = "list";
+    let result = parse_instruction(input).unwrap();
+
+    assert_eq!(result, Instruction::ListAll);
+
+    let input = "Add Sally to Engineering";
+    let result = parse_instruction(input).unwrap();
+
+    assert_eq!(
+      result,
+      Instruction::Add("Engineering".into(), "Sally".into())
+    );
+
+    let input = "List Engineering";
+    let result = parse_instruction(input).unwrap();
+
+    assert_eq!(result, Instruction::List("Engineering".into()));
+  }
 }
